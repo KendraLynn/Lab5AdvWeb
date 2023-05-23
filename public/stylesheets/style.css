@@ -1,10 +1,11 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #07857e;
 }
 
 a {
-  color: #00B7FF;
+  color: #07857e;
 }
 
 
@@ -16,25 +17,28 @@ body {
 }
 
 #messages {
-  background-color: beige;
+  background-color: rgb(176, 232, 245);
   max-height: 60vh;
   overflow-y: auto;
-  border: darkgray 2px inset;
+  border: darkgray 3px inset;
 
 }
 
-#send_input{
-  display: flex;  
+#send_input {
+  display: flex;
+  background-color: rgb(176, 232, 245);
 
 }
 
 #message {
   flex-grow: 5;
+  background-color: rgb(176, 232, 245);
 }
 
 
 .chat_message {
   padding: 0.5em 2px;
+  background-color: rgb(176, 232, 245);
 }
 
 .me {

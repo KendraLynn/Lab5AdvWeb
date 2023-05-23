@@ -4,43 +4,15 @@ const wsService = new WebSocketService();
 
 const msgEl = document.getElementById("messages");
 const textEl = document.getElementById("message");
+const userEl = document.getElementById("username");
 
 wsService.onmessage = (data) => {
-
-    let prefix = "";
-    if (data.time != null) {
-        var options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute:'numeric'};
-        const dt =  new Date(data.time);
-        prefix += `[${dt.toLocaleString("en-CA",options)}]`;
-    }
-
-    if(data.sender != null) {
-        prefix += `[${data.sender}] `;
-    }
-
-
-
-    msgEl.innerHTML += `<div class="chat_message other">${prefix} ${data.data}</div>`;
-    scrollBottom();
-}
-
-let reqSendMsg = () => {
-    wsService.sendMessage(textEl.value);
-    msgEl.innerHTML += `<div class="chat_message me">${textEl.value}</div>`;
-    textEl.value = "";
-    scrollBottom();
-}
-
-textEl.addEventListener("keypress", (e) => {
-    if (e.key === 'Enter') {
-        reqSendMsg();
-    }
-});
+    msgEl.innerHTML += `<div class="chat_message">${data.data}</div>`;
+};
 
 document.getElementById("send").addEventListener("click", () => {
-    reqSendMsg();
+    wsService.sendMessage(textEl.value, userEl.value);
+    msgEl.innerHTML += `<div class="chat_message_me">Username: ${userEl.value} , Message:${textEl.value}</div>`;
+    textEl.value = "";
+    userEl.value = "";
 });
-
-let scrollBottom = () => {
-    msgEl.scrollTop = msgEl.scrollHeight;
-}
